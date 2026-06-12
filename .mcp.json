@@ -1,0 +1,39 @@
+{
+  "mcpServers": {
+    "pkulaw": {
+      "type": "stdio",
+      "command": "npx",
+      "args": [
+        "-y",
+        "pkulaw-mcp-router@latest",
+        "serve",
+        "--config",
+        "$HOME/.claude/mcp-servers/pkulaw/config.toml"
+      ],
+      "env": {
+        "PKULAW_MCP_TOKEN": "${PKULAW_MCP_TOKEN}"
+      },
+      "title": "北大法宝 PKULaw",
+      "description": "北大法宝法律数据库 MCP 统一入口 — 500万+法规语义/关键词检索、1.6亿+案例语义/关键词检索、法条/案号识别与溯源、引用幻觉校验。注册获取 Token: https://mcp.pkulaw.com/console/apps"
+    },
+    "wolterskluwer-cn": {
+      "type": "stdio",
+      "command": "",
+      "args": [],
+      "env": {},
+      "title": "威科先行 Wolters Kluwer China",
+      "description": "（需自行构建 MCP Server）威科先行法律数据库 — 覆盖法律法规、裁判文书、实务指南、专业解读。API 文档参考 https://www.wkinfo.com.cn 开发者平台。构建指南见下方 recommendedCategories 说明。替换上方 command/args 为你的 MCP Server 启动命令。"
+    }
+  },
+  "recommendedCategories": [
+    "legal-research",
+    "case-law",
+    "statutory-law",
+    "citation-verification",
+    "chinese-law"
+  ],
+  "_notes": {
+    "wolterskluwer_mcp_guide": "威科先行目前无官方 MCP Server。构建自定义 MCP 时需实现以下工具接口: search_laws(法规检索), search_cases(案例检索), get_article(法条查询), validate_citation(引用核实)。参考 pkulaw-mcp-router 的实现模式。",
+    "research_selection": "北大法宝与威科先行可按需选择或同时配置。Skills 会自动检测可用 MCP 并标注引用来源。两个都配置时，引用标签分别为 [北大法宝] 和 [威科先行]。"
+  }
+}
